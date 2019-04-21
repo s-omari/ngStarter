@@ -1,0 +1,26 @@
+// @import '../../../../variables'
+// $icon-font-path: '../node_modules/bootstrap-sass/assets/fonts/bootstrap/'
+mat-toolbar {
+  // height: $appHeaderHeight
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
+  position: relative;
+  width: 100%;
+  z-index: 800;
+
+  .fill-remaining-space {
+    flex: 1 1 auto;
+  }
+
+
+  .color-box {
+    display: inline-flex;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    float: left;
+  }
+
+.logo {
+  padding: 0 60px;
+}
+}

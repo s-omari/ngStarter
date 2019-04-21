@@ -1,0 +1,23 @@
+{   
+    "universals": {
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirm": "Password Confirmation"
+    },
+    "welcomeNav": {
+        "signup": "Signup",
+        "login": "Login"
+    },
+    "footer": {
+        "copyright": "Copyright"
+    },
+    "login": {
+        "title": "Login",
+        "forgotPassword": "Forgot your password?"
+    },
+    "signup": {
+        "add": "Create You're Account",
+        "create": "Create my account",
+        "back": "Back to login"
+    }
+}

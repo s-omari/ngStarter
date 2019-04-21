@@ -1,0 +1,30 @@
+<div class="row h-100">
+
+  <ng-container *ngIf="itemUsers.length > 0">
+    <div class="col-6">
+
+      <mat-nav-list>
+        <a (click)="selectUser(user)" [class.active]="user.id === selectedUser?.id" mat-list-item *ngFor="let user of itemUsers">
+          {{ user.name }}
+        </a>
+      </mat-nav-list>
+    </div>
+    <!-- <ul class="col-6">
+      <li (click)="selectUser(user)" *ngFor="let user of itemUsers">{{user.name}}</li>
+    </ul> -->
+
+
+
+    <div class="col-6">
+      <pre>{{selectedUser |json}}</pre>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="itemUsers.length == 0">
+    <p>This project has no users</p>
+  </ng-container>
+
+
+
+
+</div>

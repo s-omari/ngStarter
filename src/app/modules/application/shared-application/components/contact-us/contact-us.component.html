@@ -1,0 +1,65 @@
+<mat-card style="margin-top:100px" class="text-center p-5" color="primary" [hidden]="isSubmitting || requestStatus">
+  <i style="font-size:55px;" class="px-5 mb-2 material-icons" [hidden]="isSubmitting || requestStatus"> email </i>
+  <h5>Contact Us</h5>
+  <mat-card-content>
+    <form #updateForm="ngForm" (ngSubmit)="contactUs($event)" [hidden]="isSubmitting">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="mail.userEmail" (ngModelChange)="invalidCredentials=false" placeholder="Email"
+                type="text" name="userEmail" #userEmail="ngModel" [pattern]="validationSer.patterns.email" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="mail.subject" (ngModelChange)="invalidCredentials=false" placeholder="Subject"
+                type="text" name="subject" #subject="ngModel" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12">
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="mail.body" placeholder="Message" type="text" name="body" #body="ngModel"
+                required></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center mt-2">
+          <div class="col-xs text-xs-center">
+            <button type="submit" [disabled]="updateForm.form.invalid" mat-raised-button color="accent">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row text-xs-center justify-content-center align-items-center my-2 mx-2" *ngIf="isSubmitting">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <mat-card-actions>
+      <div class="row justify-content-center align-items-center mt-2">
+        <div class="col-xs text-xs-center">
+          <button type="submit" mat-raised-button color="accent" (click)="goBack()">
+            Back
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
+<!-- Logically display based on success of async call -->
+<mat-card>
+  <div class="row text-xs-center justify-content-center align-items-center my-2 mx-2" *ngIf="requestStatus == 'success'">
+    <div class="col-12 text-center">
+      <mat-icon class="success" style="font-size:48px">thumb_up</mat-icon>
+      <h2 class="success">Mail successfully sent! Someone will be in contact with you shortly.</h2>
+    </div>
+    <div class="col-12 text-center">
+      <a mat-button [routerLink]="['/']">Back</a>
+    </div>
+  </div>
+</mat-card>

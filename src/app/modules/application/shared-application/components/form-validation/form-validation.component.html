@@ -1,0 +1,19 @@
+<!-- If errors are found, and form has been either touched or received input... -->
+<div *ngIf="name.errors && (name.dirty || name.touched)">
+  <!-- Required input error -->
+  <mat-error [hidden]="!name.errors.required">
+    <span class="validation-message" translate>{{errorMessages.required ? errorMessages.required: 'Required field' }} </span>
+  </mat-error>
+  <!-- Input did not match pattern from validation service -->
+  <mat-error [hidden]="!name.errors.pattern">
+    <span class="validation-message" translate>{{errorMessages.pattern ? errorMessages.pattern: 'Invalid value' }} </span>
+  </mat-error>
+  <!-- Not long enough -->
+  <mat-error [hidden]="!name.errors.minlength">
+    <span class="validation-message" translate>{{errorMessages.minlength ? errorMessages.minlength: 'Value is too short' }} </span>
+  </mat-error>
+  <!-- Too long -->
+  <mat-error [hidden]="!name.errors.maxlength">
+    <span class="validation-message" translate>{{errorMessages.maxlength ? errorMessages.maxlength: 'Value is too long' }} </span>
+  </mat-error>
+</div>

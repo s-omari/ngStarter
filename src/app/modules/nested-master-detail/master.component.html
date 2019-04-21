@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <button mat-button routerLink="" class="">
+    Nested Master Detail
+  </button>
+  <span class="spacer"></span>
+</mat-toolbar>
+<mat-sidenav-container class="h-100">
+
+  <mat-sidenav class="h-100" #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)" class="sidenav" [attr.role]="'navigation'" [mode]="'side'" [opened]="true">
+
+
+    <button mat-raised-button class="m-4" (click)="openCreateDialog()">Create Project</button>
+
+    <div class="search-bar">
+      <mat-form-field appearance="fill" [floatLabel]="'never'">
+        <input matInput type="text" placeholder="Search Projects" [(ngModel)]="searchTerm" (input)="search($event.target.value)">
+        <mat-icon matPrefix>search</mat-icon>
+        <button class="input-clear-button" mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear"
+          (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <mat-nav-list dense>
+      <h3 mat-subheader>Projects</h3>
+      <a [class.active]="activeNav == item.id" mat-list-item *ngFor="let item of filteredItems" (click)="selectItem(item) ">
+        {{ item.name }}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <div *ngIf="isHandset$ | async" class="toggleRight">
+      <button class="float-right" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
+      </button>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,46 @@
+
+    <form #loginForm="ngForm" class="h-100" (ngSubmit)="login($event)" [hidden]="isSubmitting">
+      <div class="d-flex flex-column h-100">
+        <div *ngIf="invalidCredentials">
+          <p class="text-danger"> Invalid credentials , please ensure username and password are correct. </p>
+        </div>
+
+        <mat-form-field appearance="outline" [floatLabel]="'always'" >
+            <mat-label>Username / Email</mat-label>
+            <input  matInput [(ngModel)]="credentials.email" (ngModelChange)="invalidCredentials=false" placeholder="{{'universals.email' | translate}}"
+              type="text" name="email" #email="ngModel"  required>
+          </mat-form-field>
+          <!-- <form-validation [name]="email" [errorMessages]="{'pattern':'Please enter a valid email address'}">
+          </form-validation> -->
+
+
+          <mat-form-field  appearance="outline" [floatLabel]="'always'">
+              <mat-label>Password</mat-label>
+              <input matInput [(ngModel)]="credentials.password" (ngModelChange)="invalidCredentials=false" placeholder="{{'universals.password' | translate}}"
+                type="password" name="password" #password="ngModel" required>
+            </mat-form-field>
+
+
+            <div class="d-flex justify-content-between">
+                <a mat-button [routerLink]="['/application/public/forgot-password']">{{ 'login.forgotPassword' | translate }}</a>
+            
+                <button color="primary" type="submit" class="" [disabled]="loginForm.form.invalid" mat-raised-button color="accent">
+                    {{'login.title' | translate}}
+                  </button>
+            </div>
+
+
+<div class="flex-spacer"></div>
+
+<div class="flex-column justify-content-center align-items-center mt-2">
+    <p class="w-100">Dont have an account?
+   <button mat-button [routerLink]="['/application/public/sign-up']">{{ 'welcomeNav.signup' | translate }}</button>
+ </p>
+ </div>
+
+      </div>
+    </form>
+    <div class="row text-xs-center justify-content-center align-items-center my-2 mx-2" *ngIf="isSubmitting">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+

@@ -1,0 +1,10 @@
+<div class="mat-typography">
+  <h2 mat-dialog-title>{{data.title}}</h2>
+  <mat-dialog-content>
+    <p>The project along with all its properties will be deleted forever.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button (click)="confirm()">Confirm</button>
+  </mat-dialog-actions>
+</div>

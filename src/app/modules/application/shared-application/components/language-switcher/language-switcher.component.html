@@ -1,0 +1,13 @@
+<button class="" mat-button [matMenuTriggerFor]="languageSwitcher">
+  {{selectedLanguage?.name}}
+  <mat-icon class="md-light">keyboard_arrow_down</mat-icon>
+
+</button>
+<mat-menu #languageSwitcher="matMenu">
+
+  <button *ngFor="let lang of appLanguages" mat-menu-item (click)="switchLanguage(lang?.code)">
+    <img class="flag" src="/assets/images/{{lang?.countryCode}}.svg">
+    <span translate> {{lang?.name}}</span>
+  </button>
+
+</mat-menu>

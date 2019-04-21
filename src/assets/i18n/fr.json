@@ -1,0 +1,23 @@
+{
+  "universals": {
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "passwordConfirm": "Confirmation mot de passe"
+  },
+  "welcomeNav": {
+    "signup": "S'inscrire",
+    "login": "S'identifier"
+  },
+  "footer": {
+    "copyright": "Droits d'auteur"
+  },
+  "login": {
+    "title": "S'identifier",
+    "forgotPassword": "Mot de passe oublié?"
+  },
+  "signup": {
+    "add": "Ajouter un nouvel utilisateur",
+    "create": "Create my account",
+    "back": "Retour connexione"
+  }
+}

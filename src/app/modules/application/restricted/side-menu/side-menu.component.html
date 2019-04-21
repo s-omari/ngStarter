@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <!-- main navigation menu-->
+  <div class="row align-items-center justify-content-start">
+    <div class="col px-0">
+      <mat-nav-list>
+        <mat-list-item *ngFor="let link of links" class="my-2 no-padding" (click)="linkClicked.emit(link.route)"
+          [routerLink]="link.route" routerLinkActive="router-link-active">
+          <button class="w-100 h-100 px-0 text-left" mat-button>
+            <mat-icon class="align-middle mx-2"> {{link.iconName}} </mat-icon>
+            <span style="font-size:14px;" translate>{{link.label}}</span>
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+</div>

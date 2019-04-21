@@ -1,0 +1,29 @@
+<mat-card class="text-center login-card d-flex flex-column" color="primary">
+    <mat-progress-bar mode="indeterminate" color="accent" *ngIf="loadingRoute">
+      </mat-progress-bar>
+   
+<div class="brand m-3 p-3">
+    <div class="logo">ngStarter</div>
+</div>
+
+
+
+    <mat-card-content class="login-card-content">
+  <router-outlet ></router-outlet>
+  
+    </mat-card-content>
+  </mat-card>
+  
+  <div class="d-flex justify-contents-center" style="background-color:transparent;">
+      <!-- <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon> back</button> -->
+
+      <div class="d-flex align-items-center">
+        <language-switcher></language-switcher>
+        <!-- <theme-switcher [selectedTheme]="appService.appTheme" (onSelectTheme)="appService.setTheme($event)"></theme-switcher> -->
+      </div>
+    </div>
+<!--   
+  <div style="color:grey;" class="mt-4">
+    <p class="p-0 m-0">Username: postman</p>
+    <p class="p-0  m-0">Password: password</p>
+  </div> -->

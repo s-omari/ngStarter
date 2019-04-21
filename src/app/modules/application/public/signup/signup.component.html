@@ -1,0 +1,108 @@
+<mat-card class="text-center p-5 signup-card">
+  <!-- <mat-icon class="px-5 mb-2" [hidden]="isSubmitting || requestStatus">
+    account_circle </mat-icon> -->
+
+       
+<div class="brand">
+    <div class="logo">ngStarter</div>
+</div>
+
+  <mat-card-content class="signup-card-content">
+    <h2 mat-dialog-title [hidden]="user.id!=null">{{'signup.add' | translate}}</h2>
+
+    <form #userForm="ngForm" (ngSubmit)="signUp($event)" [hidden]="isSubmitting || requestStatus">
+      <div class="d-flex justify-content-center align-items-center">
+        <mat-form-field appearance="outline" [floatLabel]="'always'">
+          <mat-label>First Name</mat-label>
+          <input matInput name="firstName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" [floatLabel]="'always'">
+          <mat-label>Last Name</mat-label>
+          <input matInput name="lastName" required>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="outline" [floatLabel]="'always'">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.email" placeholder="{{'universals.email' | translate}}" type="email"
+          name="email" #email="ngModel" required [pattern]="validationService.patterns.email">
+      </mat-form-field>
+      <form-validation [name]="email" [errorMessages]="{'pattern':'Please enter a valid email address'}">
+      </form-validation>
+ 
+      <h4 *ngIf="requestStatus == 'email already exists'" class="text-danger"> This email is already registered </h4>
+          
+
+      <div class="d-flex justify-content-center align-items-center">
+
+        <mat-form-field appearance="outline" [floatLabel]="'always'">
+          <mat-label>Password</mat-label>
+
+          <input matInput [(ngModel)]="user.password" placeholder="{{'universals.password' | translate}}"
+            type="password" name="password" #password="ngModel" [pattern]="validationService.patterns.password" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" [floatLabel]="'always'">
+          <mat-label>Confirm</mat-label>
+          <input matInput [(ngModel)]="user.password_confirmation"
+            placeholder="{{'universals.passwordConfirm' | translate}}" type="password" name="password_confirmation"
+            #password_confirmation="ngModel" [pattern]="user.password" required>
+        </mat-form-field>
+
+        <div class="d-flex flex-column">
+          <form-validation [name]="password"
+            [errorMessages]="{'pattern':'Password must contain at least one uppercase character, one lowercase character and one number'}">
+          </form-validation>
+          <form-validation [name]="password_confirmation"
+            [errorMessages]="{'pattern':'Please ensure passwords match '}">
+          </form-validation>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <a mat-button [routerLink]="['application/public/login']">{{'signup.back' | translate}}</a>
+        <button type="submit" [disabled]="userForm.form.invalid" mat-raised-button color="accent">
+          {{'signup.create' | translate}}
+        </button>
+      </div>
+
+    </form>
+
+    <div class="row text-xs-center justify-content-center align-items-center my-5 mx-5" *ngIf="isSubmitting">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+
+
+    <div class="row text-xs-center justify-content-center align-items-center my-2 mx-2"
+      *ngIf="requestStatus == 'success'">
+      <div class="col-12">
+        <mat-icon class="success" style="font-size:48px">thumb_up</mat-icon>
+        <h2 class="success">Check your email for verification</h2>
+      </div>
+      <div class="col">
+        <a mat-button [routerLink]="['application/public/login']">Login</a>
+      </div>
+    </div>
+    <div *ngIf="requestStatus == 'invalid email'" class="row py-2 justify-content-center align-items-center">
+      <div class="col">
+        <h4 class="text-danger"> This email is already registered </h4>
+      </div>
+      <div class="row justify-content-center align-items-center mt-3">
+        <div class="col">
+          <a mat-button [routerLink]="['/public/forgot-password']">Forgot your password?</a>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>
+
+<div class="d-flex justify-contents-center" style="background-color:transparent;">
+    <!-- <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon> back</button> -->
+
+    <div class="d-flex align-items-center">
+      <language-switcher></language-switcher>
+      <!-- <theme-switcher [selectedTheme]="appService.appTheme" (onSelectTheme)="appService.setTheme($event)"></theme-switcher> -->
+    </div>
+  </div>
