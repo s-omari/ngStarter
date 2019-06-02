@@ -1,0 +1,41 @@
+<mat-toolbar class="mb-3 mat-typography" >
+  <mat-toolbar-row>
+    <!-- <div style="flex:1;" class="d-flex flex-wrap justify-content-between align-items-middle mat-typography">
+      <div>
+        <h2 class="title">{{item?.name}}</h2>
+      </div>
+
+      <p class="mat-subheading-1 pt-3 pb-3">{{item?.contact_info}}</p>
+    </div> -->
+    <breadcrumbs *ngIf="breadcrumbs" style="flex:1;" [breadcrumbs]="breadcrumbs"></breadcrumbs>
+    
+
+
+
+    <!-- <div class="pl-5">
+      <button mat-icon-button (click)="openEditDialog(item)" [matTooltipPosition]="'below'" matTooltip="Edit">
+        <mat-icon class="material-icons">edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openConfirmDeleteDialog(item)" [matTooltipPosition]="'below'" matTooltip="Delete">
+        <mat-icon class="material-icons">delete</mat-icon>
+      </button>
+    </div> -->
+
+
+  </mat-toolbar-row>
+
+  <!-- <mat-toolbar-row>
+    <button mat-button color="primary" [routerLink]="['./about/']">About</button>
+    <button mat-button color="primary" [routerLink]="['./users/']">Users ({{item?.users.length}})</button>
+
+
+  </mat-toolbar-row> -->
+
+</mat-toolbar>
+
+
+<div class="container-fluid mat-typography">
+<pre>{{this.application |json}}</pre>
+  <router-outlet></router-outlet>
+
+</div>

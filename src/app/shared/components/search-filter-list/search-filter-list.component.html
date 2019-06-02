@@ -1,0 +1,15 @@
+<div class="search-bar">
+  <mat-form-field appearance="fill" [floatLabel]="'never'">
+    <input matInput type="text" placeholder="Search Projects" [(ngModel)]="searchTerm" (input)="search($event.target.value)">
+    <mat-icon matPrefix>search</mat-icon>
+    <button class="input-clear-button" mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear"
+      (click)="clearSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<mat-nav-list dense>
+  <a [class.active]="activeNav == item.id" mat-list-item *ngFor="let item of filteredItems" (click)="selectItem(item) ">
+    {{ item.name }}
+  </a>
+</mat-nav-list>

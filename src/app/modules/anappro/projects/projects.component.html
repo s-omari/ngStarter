@@ -1,0 +1,19 @@
+<div class="row  flex-wrap mat-typography m-4">
+  <mat-card *ngFor="let project of projects" class="d-flex flex-column justify-content-around m-4 demo-card mat-card-flat"
+   >
+    <mat-card-title [routerLink]="['../project/', project.id, 'applications']">{{project.name}}</mat-card-title>
+    <mat-card-content class="text-black-50 m-0" *ngIf="project.about">{{project.about}}</mat-card-content>
+
+    <div class="spacer"></div>
+    <mat-card-actions class="d-flex">
+
+      <ng-container *ngIf="project.users">
+          <!-- <button *ngFor="let user of project.users" mat-mini-fab   >{{user.name}}</button> -->
+          <!-- <ngx-avatar name="{{user.name}}"></ngx-avatar> -->
+          <ngx-avatar *ngFor="let user of project.users" class="cursor-pointer" [size]="30" [name]="user.name"></ngx-avatar>
+
+      </ng-container>
+      
+    </mat-card-actions>
+  </mat-card>
+</div>

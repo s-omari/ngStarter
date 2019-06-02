@@ -1,0 +1,36 @@
+<mat-sidenav-container autosize class="h-100 mat-typography">
+
+  <mat-sidenav color="primary" class="h-100" #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'slide' : 'side'" [opened]="!(isHandset$ | async)" class="sidenav"
+    [attr.role]="'navigation'" [mode]="'side'" [opened]="true">
+
+
+<app-side-nav [state]="sideNavState"></app-side-nav>
+ 
+  </mat-sidenav>
+
+
+  <mat-sidenav-content class="d-flex flex-column" autosize>
+
+    <div id="page-content">
+      <!-- <mat-toolbar color="primary">
+              <span class="spacer"></span>
+            </mat-toolbar> -->
+      <div *ngIf="isHandset$ | async" class="toggleRight">
+        <button class="float-right" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
+        </button>
+      </div>
+      <router-outlet></router-outlet>
+
+    </div>
+
+    <footer id="sticky-footer" class="py-4">
+      <div class="container text-center">
+        <small>Copyright &copy; ngStarter</small>
+      </div>
+    </footer>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

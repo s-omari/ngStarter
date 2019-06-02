@@ -1,0 +1,48 @@
+/* Sticky Footer Classes */
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+/* Other Classes for Page Styling */
+
+.landing-page-heading {
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+}
+
+
+
+
+
+  .demo-card {
+    background-color: #e9f4ff;
+    width: 250px;
+    height: 160px;
+  
+    margin-top: 40px;
+    text-align: center;
+  
+    .mat-card-title {
+      line-height: 30px;
+      font-size: 17px;
+  
+    }
+  
+    .mat-card-actions {
+      display: flex;
+      // flex-direction: column;
+    }
+    &.app-card {
+    background-color: #ffe9e9;
+    }
+  }

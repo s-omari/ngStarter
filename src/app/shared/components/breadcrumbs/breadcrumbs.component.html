@@ -1,0 +1,27 @@
+<ul class="breadcrumbs d-flex align-items-center justify-content-start">
+
+  <ng-container *ngFor="let item of breadcrumbs ; let i=index; let last = last; ">
+
+    <li *ngIf="item.children">
+      <button mat-button class="small-button" [matMenuTriggerFor]="menu" >
+        {{item.title}}
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+
+      <mat-menu [overlapTrigger]="false" #menu="matMenu">
+        <button *ngFor="let menuItem of item.children" mat-menu-item  (click)="onSelectItem(menuItem)">{{menuItem.title}}</button>
+      </mat-menu>
+    </li>
+
+    <li *ngIf="!item.children">
+      <button mat-button class="small-button" (click)="onSelectItem(item)" >
+        {{item.title}}
+      </button>
+    </li>
+
+    <li *ngIf="!last" class="divider mr-2 ml-2 ">
+      /
+    </li>
+  </ng-container>
+
+</ul>

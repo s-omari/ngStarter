@@ -16,10 +16,12 @@ import { AuthGuardService } from './@core/authentication/auth-guard.service';
 import { AuthInterceptor } from './@core/authentication/auth-interceptor';
 import { HTTP_INTERCEPTORS , HttpClientModule } from '@angular/common/http';
 import { UserService } from './@core/services/user.service';
+// import { AppLayoutComponent } from './modules/app-layout/app-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // AppLayoutComponent
   ],
   imports: [
     BrowserModule,

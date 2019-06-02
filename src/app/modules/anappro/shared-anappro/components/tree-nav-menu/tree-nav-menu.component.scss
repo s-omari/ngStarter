@@ -1,0 +1,27 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+    padding: 0 8px;
+  }
+
+  ul,
+li {
+  list-style-type: none;
+  margin: 0;
+}
+
+// .mat-tree-node {
+//   display: unset;
+// }
+
+.mat-icon-button {
+    width:  unset;
+    height: unset;
+    line-height: unset;
+}

@@ -1,0 +1,15 @@
+.item-actions {
+    button {
+        color: grey;
+
+        &:hover {
+            color: #344D91;
+        }
+
+    }
+}
+
+.week-title {
+    font-weight: bold;
+    font-size: 25px;
+}

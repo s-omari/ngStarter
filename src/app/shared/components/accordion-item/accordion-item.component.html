@@ -1,0 +1,30 @@
+<mat-list-item (click)="toggle()" [class.active]="activeItem == '/'+item.route">
+  <a class="w-100 h-100 d-flex align-items-center" (click)="onSelectItem(item)">
+    <span class="icon-holder mr-3">
+      <mat-icon>{{item.icon}}</mat-icon>
+    </span>
+    <span>{{item.title}}</span>
+  </a>
+  <span *ngIf="item.children">
+    <mat-icon *ngIf="expanded">keyboard_arrow_up</mat-icon>
+    <mat-icon *ngIf="!expanded">keyboard_arrow_down</mat-icon>
+  </span>
+</mat-list-item>
+
+
+<mat-nav-list *ngIf="item.children" class="sub-menu w-100 p-0" [class.expanded]="expandedChange | async" [@bodyExpansion]="getExpandedState()">
+
+  <!-- check if children have children -->
+  <ng-container *ngFor="let child of item.children">
+
+    <a *ngIf="!child.children" mat-list-item (click)="onSelectItem(child)">
+      <span class="icon-holder mr-3">
+        <mat-icon>{{child.icon}}</mat-icon>
+      </span>
+      <span>{{child.title}}</span>
+    </a>
+
+    <accordion-item *ngIf="child.children" mat-list-item [item]="child" (onSelect)="onSelectItem($event)">{{child.title}}</accordion-item>
+
+  </ng-container>
+</mat-nav-list>

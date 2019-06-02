@@ -8,7 +8,7 @@ import {
 
   MatIconRegistry,
   MAT_CHIPS_DEFAULT_OPTIONS,
-
+MatTreeModule,
   MatToolbarModule,
   MatSidenavModule,
   MatButtonModule,
@@ -37,7 +37,9 @@ import {
   MatBottomSheetModule,
   MatSliderModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+MatExpansionModule,
+MatRadioModule
 
 } from '@angular/material';
 
@@ -46,7 +48,7 @@ import {
     CommonModule,
     FormsModule,ReactiveFormsModule,
     //   MdePopoverModule,
-
+MatTreeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -76,12 +78,14 @@ import {
     MatSliderModule,
 
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+MatExpansionModule,
+MatRadioModule  
 
   ],
   exports: [
     //  MdePopoverModule,
-    FormsModule,ReactiveFormsModule,
+    MatTreeModule,FormsModule,ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -111,7 +115,9 @@ import {
     MatSliderModule,
 
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+MatExpansionModule,
+MatRadioModule  
   ],
   providers: [
     MatIconRegistry,

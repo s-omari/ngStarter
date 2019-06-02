@@ -1,0 +1,100 @@
+<div class="h-100 d-flex">
+  <div class="d-flex h-100">
+    <div class="primarySidenav h-100">
+      <div class="h-100">
+        <button mat-button routerLink="" class="">
+          <mat-icon>ac_unit</mat-icon>
+        </button>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon (click)="secondarySidenavOpen = true; secondarySidenavContent = 'projects'" mat-list-icon>
+              folder_special</mat-icon>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <div *ngIf="secondarySidenavOpen" [class.hidden]="!secondarySidenavOpen" class="secondarySidenav h-100">
+      <button type="button" mat-icon-button class="ml-auto d-block" (click)="secondarySidenavOpen = false">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'application'">
+
+          <div class="d-flex">
+              <div class="app-avatar d-flex justify-contents-center align-items-center">
+                  <mat-icon class="m-auto">code</mat-icon>
+                </div>
+                <div class="d-flex flex-column" style="margin: 6px 0 0 0;">
+                <span>{{currentProject.name}}</span>
+
+                <span>{{currentProject.name}}</span>
+
+                </div>
+          </div>
+
+        <collapse-menu [menuItems]="primarySidenavMenuItems" [activeItem]="activatedUrl" (onSelect)="selectItem($event)">
+        </collapse-menu>
+
+      </div>
+      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'project'">
+        <div class="d-flex">
+            <div class="project-avatar d-flex justify-contents-center align-items-center">
+                <mat-icon class="m-auto">folder_special</mat-icon>
+              </div>
+              <span style="margin: 6px;">{{currentProject.name}}</span>
+        </div>
+
+
+        <!-- <search-filter-list [filteredItems]="filteredItems"></search-filter-list> -->
+        <collapse-menu [menuItems]="primarySidenavMenuItems" [activeItem]="activatedUrl"
+          (onSelect)="selectItem($event);"></collapse-menu>
+
+      </div>
+      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'projects'">
+        <div class="d-flex justify-contents-between">
+          <h4 mat-subheader>Projects</h4>
+          <button class="create-button ml-auto" mat-raised-button [matMenuTriggerFor]="createMenu">
+            <mat-icon class="mr-3">add</mat-icon>
+            New
+          </button>
+        </div>
+        <mat-menu class="create-menu" #createMenu="matMenu">
+          <button mat-menu-item (click)="openCreateDialog()">
+            <mat-icon>folder_special</mat-icon>
+            <span>Project</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>person_add</mat-icon>
+            <span>User</span>
+          </button>
+        </mat-menu>
+
+        <!-- <tree-nav-menu [data]="TreeData" (nodeSelected)="selectItem($event)"></tree-nav-menu> -->
+
+        <!-- <div class="search-bar">
+          <mat-form-field appearance="fill" [floatLabel]="'never'">
+            <input matInput type="text" placeholder="Search Projects" [(ngModel)]="searchTerm"
+              (input)="search($event.target.value)">
+            <mat-icon matPrefix>search</mat-icon>
+            <button class="input-clear-button" mat-button *ngIf="searchTerm" matSuffix mat-icon-button
+              aria-label="Clear" (click)="clearSearch()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <mat-nav-list dense>
+          <a [class.active]="activeNav == item.id" mat-list-item *ngFor="let item of filteredItems"
+            (click)="selectItem(item) ">
+            {{ item.name }}
+          </a>
+        </mat-nav-list> -->
+      </div>
+
+
+    </div>
+  </div>
+
+  <div (click)="secondarySidenavOpen = true" *ngIf="secondarySidenavOpen === false" class="h-100" style="width:10px;background-color: black"></div>
+
+</div>

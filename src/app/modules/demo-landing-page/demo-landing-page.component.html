@@ -1,0 +1,69 @@
+<div class="d-flex flex-column">
+  <div id="page-content">
+    <!-- <div class="container text-center">
+   
+    </div> -->
+
+    <div class="row justify-content-center text-center landing-page-heading">
+      <div class="col-md-7">
+        <h1 class="font-weight-light mt-4 text-white">ngStarter</h1>
+        <p class="lead text-white-50">The Modular and Scallable Angular Starter Application</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-around  flex-wrap mat-typography m-4">
+      <mat-card *ngFor="let module of demoModules" class="d-flex flex-column justify-content-around demo-card mat-card-flat hide-on-init"
+        animateOnScroll animationName="animated fadeInUp">
+        <mat-card-title>{{module.title}}</mat-card-title>
+        <mat-card-content class="text-black-50 m-0" *ngIf="module.description">{{module.description}}</mat-card-content>
+
+        <div class="spacer"></div>
+        <mat-card-actions class="d-flex justify-content-center">
+          <ng-container *ngIf="module.hasDemo">
+              <button mat-flat-button class="w-100" [routerLink]=[module.route] mat-button>Demo</button>
+              <!-- <button mat-button>Documentation</button> -->
+          </ng-container>
+
+          <ng-container *ngIf="!module.hasDemo">
+              
+              <p>Comming Soon!</p>
+          </ng-container>
+          
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="row justify-content-around  flex-wrap mat-typography m-4">
+        <mat-card *ngFor="let module of appModules" 
+        class="d-flex flex-column justify-content-around demo-card app-card mat-card-flat hide-on-init"
+          animateOnScroll animationName="animated fadeInUp">
+          <mat-card-title>{{module.title}}</mat-card-title>
+          <mat-card-content class="text-black-50 m-0" *ngIf="module.description">{{module.description}}</mat-card-content>
+  
+          <div class="spacer"></div>
+          <mat-card-actions class="d-flex justify-content-center">
+            <ng-container *ngIf="module.hasDemo">
+                <button mat-flat-button color="primary" [routerLink]=[module.route] mat-button>Demo</button>
+                <!-- <button mat-button>Documentation</button> -->
+            </ng-container>
+  
+            <ng-container *ngIf="!module.hasDemo">
+                
+                <p>Comming Soon!</p>
+            </ng-container>
+            
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+
+
+
+
+  </div>
+  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; ngStarter</small>
+    </div>
+  </footer>
+</div>

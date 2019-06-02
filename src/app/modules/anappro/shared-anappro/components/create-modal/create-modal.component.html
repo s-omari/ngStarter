@@ -1,0 +1,39 @@
+<div class="mat-typography">
+
+  <h2 mat-dialog-title>New Project</h2>
+  <mat-dialog-content [formGroup]="form">
+
+    <mat-form-field class="w-100">
+      <mat-label>Project Name</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="form.controls.name.invalid && form.controls.name.errors.minlength">
+        Must be longer than 3 characters
+      </mat-error>
+      <mat-error *ngIf="form.controls.name.invalid && form.controls.name.errors.required">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Project Description</mat-label>
+      <textarea  matInput formControlName="about"></textarea>
+      <mat-error *ngIf="form.controls.about.invalid && form.controls.about.errors.minlength">
+        Must be longer than 3 characters
+      </mat-error>
+      <mat-error *ngIf="form.controls.about.invalid && form.controls.about.errors.required">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <hr>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="!form.valid" (click)="save()">Save</button>
+  </mat-dialog-actions>
+
+
+
+
+</div>

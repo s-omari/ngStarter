@@ -1,0 +1,93 @@
+<mat-drawer-container class="h-100">
+  <mat-drawer-content>
+
+<div class="d-flex h-100">
+<div class="h-100" style="flex:1;">
+  
+  <mat-toolbar class="mb-3 mat-typography" >
+        <mat-toolbar-row>
+          <!-- <div style="flex:1;" class="d-flex flex-wrap justify-content-between align-items-middle mat-typography">
+            <div>
+              <h2 class="title">{{item?.name}}</h2>
+            </div>
+      
+            <p class="mat-subheading-1 pt-3 pb-3">{{item?.contact_info}}</p>
+          </div> -->
+          <breadcrumbs style="flex:1;" [breadcrumbs]="breadcrumbs" (onSelect)="selectBreadcrumb($event)"></breadcrumbs>
+          
+      
+      
+      
+          <!-- <div class="pl-5">
+            <button mat-icon-button (click)="openEditDialog(item)" [matTooltipPosition]="'below'" matTooltip="Edit">
+              <mat-icon class="material-icons">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="openConfirmDeleteDialog(item)" [matTooltipPosition]="'below'" matTooltip="Delete">
+              <mat-icon class="material-icons">delete</mat-icon>
+            </button>
+          </div> -->
+      
+      
+        </mat-toolbar-row>
+      
+        <mat-toolbar-row>
+            <button mat-button color="primary" [routerLink]="['./applications/']">Applications</button>
+
+          <button mat-button color="primary" [routerLink]="['./about/']">About</button>
+          <button mat-button color="primary" [routerLink]="['./users/']">Users ({{item?.users.length}})</button>
+      
+      
+        </mat-toolbar-row>
+      
+      </mat-toolbar>
+      
+      
+      <div class="container-fluid mat-typography">
+        <router-outlet></router-outlet>
+      </div>
+  
+</div>
+<div class="h-100">
+    <mat-list>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon  (click)="openChatSidebar()">people_outline</mat-icon>
+
+      </mat-list-item>
+      <mat-list-item>
+
+      <mat-icon mat-list-icon>folder</mat-icon>
+      </mat-list-item>
+
+      </mat-list>
+
+  </div>
+</div>
+
+  </mat-drawer-content>
+  <mat-drawer #drawer  [(opened)]="opened" class="h-100" position="end" mode="side" opened>
+      <mat-toolbar class="mb-3 mat-typography" >
+        <h2>{{rightSidebarTitle}}</h2>
+          <div style="flex:1;"></div>
+          <div class="ml-auto">
+              <mat-icon mat-list-icon  (click)="drawer.close()">close</mat-icon>
+          </div>
+      </mat-toolbar>
+
+
+      <div *ngIf="rightDrawerContent === 'members'" id="membersRightDrawer">
+        <h3>Members</h3>
+          <mat-nav-list>
+              <a [class.active]="user.id === selectedUser?.id" mat-list-item *ngFor="let user of projectMembers">
+                {{ user.name }}
+              </a>
+            </mat-nav-list>
+      </div>
+
+
+   
+  </mat-drawer>
+
+</mat-drawer-container>
+
+
