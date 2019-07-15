@@ -16,6 +16,10 @@ import { AuthGuardService } from './@core/authentication/auth-guard.service';
 import { AuthInterceptor } from './@core/authentication/auth-interceptor';
 import { HTTP_INTERCEPTORS , HttpClientModule } from '@angular/common/http';
 import { UserService } from './@core/services/user.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 // import { AppLayoutComponent } from './modules/app-layout/app-layout.component';
 
 @NgModule({
@@ -30,7 +34,9 @@ import { UserService } from './@core/services/user.service';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     UserService,

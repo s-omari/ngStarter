@@ -7,56 +7,64 @@
         </button>
         <mat-list>
           <mat-list-item>
-            <mat-icon (click)="secondarySidenavOpen = true; secondarySidenavContent = 'projects'" mat-list-icon>
+            <mat-icon
+              (click)="expandSidenav(); setSideNavState('projects'); setSecondarySidenavMenu(projectsService.getAllProjects().data)"
+              mat-list-icon>
               folder_special</mat-icon>
           </mat-list-item>
         </mat-list>
       </div>
     </div>
 
-    <div *ngIf="secondarySidenavOpen" [class.hidden]="!secondarySidenavOpen" class="secondarySidenav h-100">
-      <button type="button" mat-icon-button class="ml-auto d-block" (click)="secondarySidenavOpen = false">
+    <div *ngIf="(sidenavExpanded$ | async)" [class.hidden]="!(sidenavExpanded$ | async)" class="secondarySidenav h-100">
+      <button type="button" mat-icon-button class="ml-auto d-block" (click)="shrinkSidenav()">
         <mat-icon>arrow_back</mat-icon>
       </button>
 
-      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'application'">
+      <div *ngIf="(sidenavState$ | async) === 'application'">
 
-          <div class="d-flex">
-              <div class="app-avatar d-flex justify-contents-center align-items-center">
-                  <mat-icon class="m-auto">code</mat-icon>
-                </div>
-                <div class="d-flex flex-column" style="margin: 6px 0 0 0;">
-                <span>{{currentProject.name}}</span>
-
-                <span>{{currentProject.name}}</span>
-
-                </div>
+        <div class="d-flex">
+          <div class="app-avatar d-flex justify-contents-center align-items-center">
+            <mat-icon class="m-auto">code</mat-icon>
           </div>
+          <div class="d-flex flex-column" style="margin: 6px 0 0 0;">
+            <span>{{currentProject$.name | async}}</span>
 
-        <collapse-menu [menuItems]="primarySidenavMenuItems" [activeItem]="activatedUrl" (onSelect)="selectItem($event)">
-        </collapse-menu>
+            <span>{{currentProject$.name | async}}</span>
+
+          </div>
+        </div>
+        <!-- 
+        <collapse-menu [menuItems]="(primarySidenavMenu$ | async)" [activeItem]="activatedUrl" (onSelect)="selectItem($event)">
+        </collapse-menu> -->
 
       </div>
-      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'project'">
+      <div *ngIf="(sidenavState$ | async) === 'project'">
         <div class="d-flex">
-            <div class="project-avatar d-flex justify-contents-center align-items-center">
-                <mat-icon class="m-auto">folder_special</mat-icon>
-              </div>
-              <span style="margin: 6px;">{{currentProject.name}}</span>
+          <div class="project-avatar d-flex justify-contents-center align-items-center">
+            <mat-icon class="m-auto">folder_special</mat-icon>
+          </div>
+          <span style="margin: 6px;">{{currentProject$ |async |json }}</span>
+          <span style="margin: 6px;">{{currentProject$[0].name | async }}</span>
+          <span style="margin: 6px;">{{sidenavState$ | async }}</span>
+
+
         </div>
 
 
         <!-- <search-filter-list [filteredItems]="filteredItems"></search-filter-list> -->
-        <collapse-menu [menuItems]="primarySidenavMenuItems" [activeItem]="activatedUrl"
+        <collapse-menu [menuItems]="(secoundarySidenavMenu$ | async)" [activeItem]="activatedUrl"
           (onSelect)="selectItem($event);"></collapse-menu>
-
       </div>
-      <div *ngIf="secondarySidenavContent && secondarySidenavContent === 'projects'">
+
+
+
+
+      <div *ngIf="(sidenavState$ | async) === 'projects'">
         <div class="d-flex justify-contents-between">
-          <h4 mat-subheader>Projects</h4>
+          <h4 mat-subheader class="mt-2">Projects</h4>
           <button class="create-button ml-auto" mat-raised-button [matMenuTriggerFor]="createMenu">
-            <mat-icon class="mr-3">add</mat-icon>
-            New
+            <mat-icon>add</mat-icon>
           </button>
         </div>
         <mat-menu class="create-menu" #createMenu="matMenu">
@@ -70,8 +78,13 @@
           </button>
         </mat-menu>
 
+        <collapse-menu *ngIf="(secoundarySidenavMenu$ | async |json) !== '[]'" [menuItems]="(secoundarySidenavMenu$ | async)" [activeItem]="activatedUrl"
+          (onSelect)="selectItem($event);"></collapse-menu>
         <!-- <tree-nav-menu [data]="TreeData" (nodeSelected)="selectItem($event)"></tree-nav-menu> -->
-
+     <div *ngIf="secoundarySidenavMenu$ | async as secoundarySidenavMenu">
+       {{secoundarySidenavMenu|json}}
+     </div>
+        {{(secoundarySidenavMenu$ | async) | json}}
         <!-- <div class="search-bar">
           <mat-form-field appearance="fill" [floatLabel]="'never'">
             <input matInput type="text" placeholder="Search Projects" [(ngModel)]="searchTerm"
@@ -95,6 +108,7 @@
     </div>
   </div>
 
-  <div (click)="secondarySidenavOpen = true" *ngIf="secondarySidenavOpen === false" class="h-100" style="width:10px;background-color: black"></div>
+  <div (click)="expandSidenav()" *ngIf="!(sidenavExpanded$ | async)" class="h-100"
+    style="width:10px;background-color: black"></div>
 
 </div>

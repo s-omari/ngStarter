@@ -41,16 +41,16 @@ export class DemoLandingPageComponent implements OnInit {
   ];
 
   appModules = [
-    {
-      title: 'Anappro',
-      hasDemo: true,
-      description: '', route: '../anappro/projects'
-    },
-    {
-      title: 'Bioreader',
-      hasDemo: false,
-      description: 'Browse tabulated reports and export to PDF', route: '../reports-export'
-    },
+    // {
+    //   title: 'Anappro',
+    //   hasDemo: true,
+    //   description: '', route: '../anappro/projects'
+    // },
+    // {
+    //   title: 'Bioreader',
+    //   hasDemo: false,
+    //   description: 'Browse tabulated reports and export to PDF', route: '../reports-export'
+    // },
   ];
 
   constructor() { }

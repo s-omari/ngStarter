@@ -14,12 +14,19 @@ import * as mockData from './mock-data';
 import { MockServiceService } from './mock-service.service';
 
 import { TreeData } from './shared-anappro/components/tree-nav-menu/tree.data';
-import {ProjectsService} from './shared-anappro/services/projects.service'
+import {ProjectsService} from './shared-anappro/services/projects.service';
+import { SideNavService} from './shared-anappro/services/side-nav.service';
+
+
+import { Store } from "@ngrx/store";
+// import { Observable } from "rxjs/Observable";
+import * as fromRoot from "./shared-anappro/store";
+
 @Component({
   selector: 'master',
   templateUrl: './master.component.html',
   styleUrls: ['./master.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MasterComponent implements OnInit {
@@ -37,16 +44,17 @@ export class MasterComponent implements OnInit {
   activeNav;
   filteredItems;
 
-  // SideNav Properties
-  sideNavState;
-  secondarySidenavOpen: boolean = false;
-  secondarySidenavContent: string;
-  primarySidenavMenuItems;
-  secondarySidenavMenuItems;
 
-
+    public appPageState$: Observable<string>
+    public currentProject$: Observable<any>
+    public currentApplication$: Observable<any>
+    public sidenavExpanded$: Observable<boolean>
+    public sidenavState$: Observable<string>
+    public primarySidenavMenu$: Observable<any>
+    public secondarySidenavMenu$: Observable<any>
   TreeData;
   constructor(
+    private store: Store<fromRoot.State>,
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     public activatedRoute: ActivatedRoute,
@@ -54,6 +62,8 @@ export class MasterComponent implements OnInit {
     // private route: ActivatedRoute,
     public mockService: MockServiceService,
     public projectsService: ProjectsService,
+    public sideNavService: SideNavService
+
 
   ) {
     this.activatedUrl = this.router.url;
@@ -67,7 +77,18 @@ export class MasterComponent implements OnInit {
         this.activeNav = activeUrlSegments[2];
         console.log('this.activatedUrl' , this.activatedUrl);
         console.log('this.activeNav' , this.activeNav);
+        // this.setSideNavState(activeUrlSegments);
+        // this.sideNavService.setSecondarySidenavContent(this.activeNav);
+        this.setSideNavState(this.activeNav);
+        if(this.activeNav === 'project') {
+          const currentProjectId = urlSegments[3];
 
+          // this.setSecondarySidenavMenu();
+        } else if (this.activeNav === 'projects') {
+          // mockData.projects.data
+          this.setSecondarySidenavMenu(this.projectsService.getAllProjects().data);
+
+        }
       }
     }
     );
@@ -107,10 +128,34 @@ export class MasterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appPageState$ = this.store.select<string>(fromRoot.getAppPageState);
+    this.currentProject$ = this.store.select<any>(fromRoot.getCurrentProject);
+    this.currentApplication$ = this.store.select<any>(fromRoot.getCurrentApplication);
+    this.sidenavExpanded$ = this.store.select<boolean>(fromRoot.getSidenavExpanded);
+    this.sidenavState$ = this.store.select<string>(fromRoot.getSidenavState);
+    this.primarySidenavMenu$ = this.store.select<any>(fromRoot.getPrimarySidenavMenu);
+    this.secondarySidenavMenu$ = this.store.select<any>(fromRoot.getSecondarySidenavMenu);
+
     //TODO generate this from projects data
     this.TreeData = mockData.TreeData;
     this.getItems();
 
+  }
+
+  setCurrentProject(project) {
+    this.store.dispatch(new fromRoot.SetCurrentProject(project));
+  }
+  setCurrentApplication(application) {
+    this.store.dispatch(new fromRoot.SetCurrentApplication(application));
+  }
+  setSideNavState(state) {
+    this.store.dispatch(new fromRoot.SetSideNavState(state));
+  }
+  setPrimarySidenavMenu(menu) {
+    this.store.dispatch(new fromRoot.SetPrimaryMenu(menu));
+  }
+  setSecondarySidenavMenu(menu) {
+    this.store.dispatch(new fromRoot.SetSecondaryMenu(menu));
   }
 
   routeToSelected(item){
@@ -125,47 +170,42 @@ export class MasterComponent implements OnInit {
   selectItem(item) {
     // set currently selected item variable
     this.selectedItem = item;
-    console.log(item, 'item selected');
-    
+    // console.log(item, 'item selected');
     if (item.nodeType && item.nodeType === 'project') {
-      // this.currentProject = item;
       this.currentProject = this.projectsService.getProjectById(item.id);
+      // this.sideNavService.setSecondarySidenavContent('project');
+      this.setCurrentProject(item);
+      this.setSideNavState('project');
 
-      console.log(item.id)
-      this.secondarySidenavContent = 'project';
-      this.sideNavState['secondarySidenavContent'] = 'project';
-
-      this.primarySidenavMenuItems = [];;
-     const projectApplications = this.projectsService.getProjectApplications(item.id);
-     console.log(projectApplications , 'projectApplications')
-      // console.log(projectApplications , 'projectApplications');
+      const secondarySidenavMenu = [];
+      const projectApplications = this.projectsService.getProjectApplications(item.id);
+      console.log(projectApplications , 'projectApplications')
       projectApplications.forEach((application) => {
-        this.primarySidenavMenuItems.push(      {
+        secondarySidenavMenu.push(      {
           title: application.name,
-          route: 'anappro/application/'+ application.projectId+'/'+ application.applicationId,
+          route: 'anappro/application/' + application.projectId+'/'+ application.applicationId,
           icon: 'chrome_reader_mode',
           nodeType: 'application'
         })
       });
+      this.setSecondarySidenavMenu(secondarySidenavMenu);
+      // this.sideNavService.ssetecondarySidenavMenu(secondarySidenavMenu);
+      // this.sideNavService.setSidenavData('currentProject' , item);
 
-      console.log(this.primarySidenavMenuItems , 'primarySidenavMenuItems after edit');
+      console.log(secondarySidenavMenu , 'secondarySidenavMenu after edit');
 
 
       this.router.navigate(['anappro/project/', item.id, 'applications']);
     }
     if (item.nodeType && item.nodeType === 'projectsParent') {
-      this.secondarySidenavContent = 'projects';
-      this.sideNavState['secondarySidenavContent'] = 'projects';
 
-
+      this.sideNavService.setSecondarySidenavContent('projects');
       this.router.navigate(['anappro/projects']);
 
     }
     if (item.nodeType && item.nodeType === 'application') {
-      this.secondarySidenavContent = 'application';
-      this.sideNavState['secondarySidenavContent'] = 'application';
 
-      console.log('this.secondarySidenavContent' , this.secondarySidenavContent)
+      this.sideNavService.setSecondarySidenavContent('application');
 
       const applicationMenu = [
         {
@@ -181,12 +221,12 @@ export class MasterComponent implements OnInit {
           // nodeType: 'application'
         }
       ];
-      this.primarySidenavMenuItems = applicationMenu;
+      this.sideNavService.setSecondarySidenavMenuItems(applicationMenu);
+
       this.router.navigate(['anappro/application/', item.projectId, item.applicationId]);
 
     }
 
-    console.log(this.secondarySidenavContent)
   }
 
   clearSearch() {
