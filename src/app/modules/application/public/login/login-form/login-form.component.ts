@@ -45,13 +45,13 @@ export class LoginFormComponent {
     this.publicService.login(this.credentials)
       .subscribe((res) => {
 
-        if (res && res.json()) {
-        const response = res.json();
-        // store token if it is returned as a result of login
-        this.userService.setToken(JSON.stringify(response.data.token));
-        // store user data if returned as a result of login
-        this.userService.setUser(response.data.user);
-        }
+        // if (res) {
+        // const response = res;
+        // // store token if it is returned as a result of login
+        // this.userService.setToken(JSON.stringify(response.data.token));
+        // // store user data if returned as a result of login
+        // this.userService.setUser(response.data.user);
+        // }
 
         // Set token and user data in localStorage on success
         const encodedToken = btoa(this.credentials.email + ':' + this.credentials.password);

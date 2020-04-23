@@ -1,0 +1,23 @@
+{
+  "universals": {
+    "email": "Email",
+    "password": "Passwort",
+    "passwordConfirm": "Passwort Bestätigung"
+  },
+  "welcomeNav": {
+    "signup": "Anmelden",
+    "login": "Anmeldung"
+  },
+  "footer": {
+    "copyright": "Urheberrechte"
+  },
+  "login": {
+    "title": "Anmeldung",
+    "forgotPassword": "Haben Sie Ihr Passwort vergessen?"
+  },
+  "signup": {
+    "add": "Neuen Benutzer hinzufügen",
+    "create": "Erstelle meinen Account",
+    "back": "Zurück zur Anmeldung"
+  }
+}
