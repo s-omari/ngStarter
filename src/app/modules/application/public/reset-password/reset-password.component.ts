@@ -1,7 +1,7 @@
 import { ValidationService } from '../../../../@core/services/validation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 

@@ -10,18 +10,29 @@ const routes: Routes = [
   // { path: 'chat', loadChildren: './demo-modules/chat/chat.module#ChatModule' },
   // { path: 'appointments', loadChildren: './demo-modules/appointments/appointments.module#AppointmentsModule' },
   // { path: 'home', loadChildren: './landing-page/landing-page.module#LandingPageModule' },
-  { path: 'home', loadChildren: './modules/demo-landing-page/demo-landing-page.module#DemoLandingPageModule' },
-  { path: 'app-layout', loadChildren: './modules/app-layout/app-layout.module#AppLayoutModule' },
-  { path: 'search-filter', loadChildren: './modules/search-filter/search-filter.module#SearchFilterModule' },
+  // loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
 
-  { path: 'application', loadChildren: './modules/application/application.module#ApplicationModule' },
+  { path: 'home',
+  loadChildren: () => import('./modules/demo-landing-page/demo-landing-page.module').then(m => m.DemoLandingPageModule)
+},
+  { path: 'app-layout', 
+  loadChildren: () => import('./modules/app-layout/app-layout.module').then(m => m.AppLayoutModule)
+  },
+  { path: 'search-filter',
+  loadChildren: () => import('./modules/search-filter/search-filter.module').then(m => m.SearchFilterModule)
+ },
 
-  { path: 'nested-master-detail', loadChildren: './modules/nested-master-detail/master.module#MasterModule' },
+  { path: 'application', 
+  loadChildren: () => import('./modules/application/application.module').then(m => m.ApplicationModule)
+  },
 
-  { path: 'anappro', loadChildren: './modules/anappro/master.module#MasterModule' },
-
+  { path: 'nested-master-detail', 
+  loadChildren: () => import('./modules/nested-master-detail/master.module').then(m => m.MasterModule)
+},
+  { path: 'anappro', 
+  loadChildren: () => import('./modules/anappro/master.module').then(m => m.MasterModule)
+ },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-
 ];
 
 @NgModule({

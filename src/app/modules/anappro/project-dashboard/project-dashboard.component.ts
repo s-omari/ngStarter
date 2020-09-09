@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditModalComponent } from '../shared-anappro/components/edit-modal/edit-modal.component';
 import { ConfirmDeleteModalComponent } from '../shared-anappro/components/confirm-delete-modal/confirm-delete-modal.component';
 import { SideNavService} from '../shared-anappro/services/side-nav.service';

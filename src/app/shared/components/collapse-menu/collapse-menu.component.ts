@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 import { CdkAccordionItem } from '@angular/cdk/accordion';
-import { matExpansionAnimations, MatExpansionPanelState } from '@angular/material';
+import { matExpansionAnimations, MatExpansionPanelState } from '@angular/material/expansion';
 
 @Component({
   selector: 'collapse-menu',

@@ -7,7 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSidenav } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { CreateModalComponent } from './shared-anappro/components/create-modal/create-modal.component';
 
 import * as mockData from './mock-data';

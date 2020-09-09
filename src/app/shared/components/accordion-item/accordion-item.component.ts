@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkAccordionItem } from '@angular/cdk/accordion';
-import { matExpansionAnimations, MatExpansionPanelState } from '@angular/material';
+import { matExpansionAnimations, MatExpansionPanelState } from '@angular/material/expansion';
 import { trigger, animate, state, style, transition } from '@angular/animations';
 @Component({
   selector: 'accordion-item',
